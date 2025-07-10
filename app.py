@@ -103,8 +103,12 @@ st.markdown("""
 st.title("🚀 AI Lead Finder & Marketing Audit Tool")
 
 st.markdown("""
-Unlock local business growth in seconds.  
-This AI-powered agent finds businesses that need digital marketing help, then whips up tailored insights.
+<div style='color:#F63366; font-size:18px;'>
+    Unlock local business growth in seconds.<br>
+    This AI-powered agent finds businesses that need digital marketing help, then whips up tailored insights.
+</div>
+
+<br>
 
 ✅ Website speed & UX  
 ✅ SEO quick audits  
@@ -114,7 +118,8 @@ This AI-powered agent finds businesses that need digital marketing help, then wh
 Perfect for marketers, consultants, or anyone curious about local opportunities.
 
 ✨ Get data-driven leads, boost strategy, and watch your pipeline grow — effortlessly.
-""")
+""", unsafe_allow_html=True)
+
 
 # Form inputs
 query = st.text_input("📌 Enter type of business & location (like 'Dental Clinics Boston'):")

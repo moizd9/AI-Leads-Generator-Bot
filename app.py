@@ -6,10 +6,20 @@ import time
 from openai import OpenAI
 import os
 
-# 🚀 Setup your API keys here
-openai_key = st.secrets["api_keys"]["openai"]
-serpapi_key = st.secrets["api_keys"]["serpapi"]
+# 🚀 Load keys securely from secrets.toml, then env, then fallback to sidebar
+openai_key = st.secrets.get("openai_key") or os.getenv("OPENAI_API_KEY")
+serpapi_key = st.secrets.get("serpapi_key") or os.getenv("SERPAPI_KEY")
 
+# Sidebar fallback so you can still run manually
+openai_key = st.sidebar.text_input("Enter OpenAI Key", type="password", value=openai_key or "")
+serpapi_key = st.sidebar.text_input("Enter SerpAPI Key", type="password", value=serpapi_key or "")
+
+# If still missing, notify user
+if not openai_key or not serpapi_key:
+    st.info("👉 Please enter your API keys in the sidebar to start.")
+    st.stop()
+
+# 🚀 Setup OpenAI client
 client = OpenAI(api_key=openai_key)
 
 # 🚀 Helper functions
@@ -32,7 +42,7 @@ def get_businesses_from_google_maps(query):
     response = requests.get(url, params=params)
     data = response.json()
 
-    # ✅ ADDED DEBUG: show full JSON in Streamlit
+    # ✅ Debug output
     st.subheader("Debug: Raw SerpAPI JSON")
     st.json(data)
 
@@ -45,7 +55,6 @@ def get_businesses_from_google_maps(query):
             "Rating": res.get("rating", 0)
         })
     return pd.DataFrame(businesses)
-
 
 def get_full_gpt_analysis(company_name, website, company_type):
     prompt = f"""
@@ -85,7 +94,7 @@ Business:
         st.warning(f"⚠️ JSON failed for {company_name}. Showing raw: {text[:100]}...")
         return "", "", "", "", "", ""
 
-# 🚀 Streamlit UI
+# 🚀 Main UI
 st.title("🚀 AI Lead Finder & Marketing Audit Tool")
 query = st.text_input("Enter type of business & location (like 'Ayurveda Clinics Dubai'):")
 
@@ -102,7 +111,7 @@ if st.button("Run Agent"):
                 brand_image = classify_brand_image(rating)
 
                 insight, hook, speed, theme, seo, social = get_full_gpt_analysis(company, website, ctype)
-                time.sleep(1)
+                time.sleep(1)  # avoid hammering API
 
                 if insight:
                     results.append({
@@ -118,7 +127,7 @@ if st.button("Run Agent"):
                         "SEO Quick Audit": seo,
                         "Social Presence Guess": social
                     })
-            
+
             out_df = pd.DataFrame(results)
             st.success("✅ Done! See your leads below.")
             st.dataframe(out_df)
@@ -126,5 +135,3 @@ if st.button("Run Agent"):
             st.download_button("📥 Download CSV", csv, "leads.csv", "text/csv")
     else:
         st.warning("Please enter a business & location to start.")
-else:
-    st.info("👉 Please enter your API keys in the sidebar to start.")

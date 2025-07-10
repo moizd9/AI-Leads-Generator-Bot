@@ -85,7 +85,13 @@ query = st.text_input("Enter type of business & location (like 'Dental Clinics B
 st.caption("Get a quick list of local businesses with marketing audit insights powered by AI 🚀")
 
 st.markdown("""
-<style>
+    <style>
+    body {
+        background-color: #a2bdfa;
+    }
+    .stApp {
+        background-color: #a2bdfa;
+    }
     .stButton>button {
         background-color: #F63366;
         color: white;
@@ -100,8 +106,32 @@ st.markdown("""
         border: 1px solid #eaeaea;
         border-radius: 8px;
     }
-</style>
+    </style>
 """, unsafe_allow_html=True)
+
+# Intro paragraph
+st.markdown("""
+### 📊 This AI-Powered Lead Finder & Marketing Audit Tool helps you discover local businesses that need digital marketing support and provides instant, tailored insights to grow their online presence.
+
+From analyzing website speed and user experience to offering SEO quick audits and social media presence guesses, this smart agent does the heavy lifting for you.
+
+Whether you're a marketer, consultant, or simply curious about local businesses, this tool delivers actionable recommendations and outreach hooks — all in seconds. Elevate your strategy and unlock new opportunities with data-driven intelligence at your fingertips.
+""")
+
+# Your existing app content here
+st.title("🚀 AI Lead Finder & Marketing Audit Tool")
+query = st.text_input("Enter type of business & location (like 'Dental Clinics Boston'):")
+
+# ... rest of your app code ...
+
+# Footer
+st.markdown("""
+---
+<p style='text-align: center;'>
+    Developed By - <strong>Moiz Deshmukh</strong>
+</p>
+""", unsafe_allow_html=True)
+
 
 if st.button("Get Leads"):
     if query:
@@ -141,4 +171,4 @@ if st.button("Get Leads"):
     else:
         st.warning("Please enter a business & location to start.")
 else:
-    st.info("👉 Enter your query and click 'Run Agent' to start.")
+    st.info("👉 Enter your query and click 'Get Leads' to start.")

@@ -80,9 +80,30 @@ Business:
 
 # 🚀 Streamlit UI
 st.title("🚀 AI Lead Finder & Marketing Audit Tool")
-query = st.text_input("Enter type of business & location (like 'Ayurveda Clinics Dubai'):")
+query = st.text_input("Enter type of business & location (like 'Dental Clinics Boston'):")
 
-if st.button("Run Agent"):
+st.caption("Get a quick list of local businesses with marketing audit insights powered by AI 🚀")
+
+st.markdown("""
+<style>
+    .stButton>button {
+        background-color: #F63366;
+        color: white;
+        border-radius: 8px;
+        padding: 0.5em 1em;
+    }
+    .stButton>button:hover {
+        background-color: #d42255;
+        color: white;
+    }
+    .stDataFrame {
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+if st.button("Get Leads"):
     if query:
         with st.spinner(f"Searching for: {query} ..."):
             df = get_businesses_from_google_maps(query)

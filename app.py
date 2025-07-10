@@ -79,24 +79,18 @@ Business:
         return "", "", "", "", "", ""
 
 # 🚀 Streamlit UI
-st.title("🚀 AI Lead Finder & Marketing Audit Tool")
-query = st.text_input("Enter type of business & location (like 'Dental Clinics Boston'):")
-
-st.caption("Get a quick list of local businesses with marketing audit insights powered by AI 🚀")
-
 st.markdown("""
     <style>
-    body {
-        background-color: #a2bdfa;
-    }
     .stApp {
-        background-color: #a2bdfa;
+        background-color: #fff8e3;
+        font-family: 'Helvetica', sans-serif;
     }
     .stButton>button {
         background-color: #F63366;
         color: white;
         border-radius: 8px;
-        padding: 0.5em 1em;
+        padding: 0.6em 1.2em;
+        font-size: 1rem;
     }
     .stButton>button:hover {
         background-color: #d42255;
@@ -109,33 +103,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Main heading
+st.markdown("<h1 style='text-align: center;'>🚀 AI Lead Finder & Marketing Audit Tool</h1>", unsafe_allow_html=True)
+
 # Intro paragraph
 st.markdown("""
-### 📊 This AI-Powered Lead Finder & Marketing Audit Tool helps you discover local businesses that need digital marketing support and provides instant, tailored insights to grow their online presence.
+<div style='font-size: 1.1rem; line-height: 1.6; margin-top: 20px;'>
+This <strong>AI-Powered Lead Finder & Marketing Audit Tool</strong> helps you discover local businesses that need digital marketing support and provides instant, tailored insights to grow their online presence.
 
 From analyzing website speed and user experience to offering SEO quick audits and social media presence guesses, this smart agent does the heavy lifting for you.
 
 Whether you're a marketer, consultant, or simply curious about local businesses, this tool delivers actionable recommendations and outreach hooks — all in seconds. Elevate your strategy and unlock new opportunities with data-driven intelligence at your fingertips.
-""")
-
-# Your existing app content here
-st.title("🚀 AI Lead Finder & Marketing Audit Tool")
-query = st.text_input("Enter type of business & location (like 'Dental Clinics Boston'):")
-
-# ... rest of your app code ...
-
-# Footer
-st.markdown("""
----
-<p style='text-align: center;'>
-    Developed By - <strong>Moiz Deshmukh</strong>
-</p>
+</div>
 """, unsafe_allow_html=True)
 
+# Input field
+query = st.text_input("📌 Enter type of business & location (like 'Dental Clinics Boston'):")
 
+# Main action button
 if st.button("Get Leads"):
     if query:
-        with st.spinner(f"Searching for: {query} ..."):
+        with st.spinner(f"🔎 Searching for: {query} ..."):
             df = get_businesses_from_google_maps(query)
             results = []
             for i, row in df.iterrows():
@@ -169,6 +157,14 @@ if st.button("Get Leads"):
             csv = out_df.to_csv(index=False)
             st.download_button("📥 Download CSV", csv, "leads.csv", "text/csv")
     else:
-        st.warning("Please enter a business & location to start.")
+        st.warning("⚠️ Please enter a business & location to start.")
 else:
     st.info("👉 Enter your query and click 'Get Leads' to start.")
+
+# Footer
+st.markdown("""
+<hr style='border: 1px solid #ccc;'>
+<p style='text-align: center; font-size: 0.9rem;'>
+    Developed By - <strong>Moiz Deshmukh</strong>
+</p>
+""", unsafe_allow_html=True)

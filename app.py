@@ -5,14 +5,13 @@ import json
 import time
 from openai import OpenAI
 
-# 🚀 Load your API keys securely from .streamlit/secrets.toml
+# 🚀 Load API keys from Streamlit secrets
 openai_key = st.secrets["api_keys"]["openai_key"]
 serpapi_key = st.secrets["api_keys"]["serpapi_key"]
 
-# 🔥 Setup OpenAI client
 client = OpenAI(api_key=openai_key)
 
-# 🚀 Helper functions
+# Helper functions
 def classify_brand_image(rating):
     if rating < 4:
         return "Average"
@@ -31,10 +30,6 @@ def get_businesses_from_google_maps(query):
     }
     response = requests.get(url, params=params)
     data = response.json()
-
-    # ✅ Debug: show raw JSON in Streamlit
-    st.subheader("Debug: Raw SerpAPI JSON")
-    st.json(data)
 
     businesses = []
     for res in data.get("local_results", []):
@@ -81,7 +76,6 @@ Business:
             data.get("social", "")
         )
     except json.JSONDecodeError:
-        st.warning(f"⚠️ JSON failed for {company_name}. Showing raw: {text[:100]}...")
         return "", "", "", "", "", ""
 
 # 🚀 Streamlit UI
@@ -126,4 +120,4 @@ if st.button("Run Agent"):
     else:
         st.warning("Please enter a business & location to start.")
 else:
-    st.info("👉 Ready to go! Just enter a query and click 'Run Agent'.")
+    st.info("👉 Enter your query and click 'Run Agent' to start.")

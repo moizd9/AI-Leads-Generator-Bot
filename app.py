@@ -30,7 +30,6 @@ def get_businesses_from_google_maps(query):
     }
     response = requests.get(url, params=params)
     data = response.json()
-
     businesses = []
     for res in data.get("local_results", []):
         businesses.append({
@@ -78,23 +77,20 @@ Business:
     except json.JSONDecodeError:
         return "", "", "", "", "", ""
 
-# 🚀 Streamlit UI
+# 🚀 Streamlit UI with new style
 st.markdown("""
     <style>
     .stApp {
         background-color: #fff8e3;
-        font-family: 'Helvetica', sans-serif;
     }
     .stButton>button {
         background-color: #F63366;
         color: white;
         border-radius: 8px;
-        padding: 0.6em 1.2em;
-        font-size: 1rem;
+        padding: 0.5em 1em;
     }
     .stButton>button:hover {
         background-color: #d42255;
-        color: white;
     }
     .stDataFrame {
         border: 1px solid #eaeaea;
@@ -103,27 +99,29 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Main heading
-st.markdown("<h1 style='text-align: center;'>🚀 AI Lead Finder & Marketing Audit Tool</h1>", unsafe_allow_html=True)
+# 🔥 New header and intro
+st.title("🚀 AI Lead Finder & Marketing Audit Tool")
 
-# Intro paragraph
 st.markdown("""
-<div style='font-size: 1.1rem; line-height: 1.6; margin-top: 20px;'>
-This <strong>AI-Powered Lead Finder & Marketing Audit Tool</strong> helps you discover local businesses that need digital marketing support and provides instant, tailored insights to grow their online presence.
+Unlock local business growth in seconds.  
+This AI-powered agent finds businesses that need digital marketing help, then whips up tailored insights.
 
-From analyzing website speed and user experience to offering SEO quick audits and social media presence guesses, this smart agent does the heavy lifting for you.
+✅ Website speed & UX  
+✅ SEO quick audits  
+✅ Social media pulse  
+✅ Outreach hooks & smart suggestions  
 
-Whether you're a marketer, consultant, or simply curious about local businesses, this tool delivers actionable recommendations and outreach hooks — all in seconds. Elevate your strategy and unlock new opportunities with data-driven intelligence at your fingertips.
-</div>
-""", unsafe_allow_html=True)
+Perfect for marketers, consultants, or anyone curious about local opportunities.
 
-# Input field
+✨ Get data-driven leads, boost strategy, and watch your pipeline grow — effortlessly.
+""")
+
+# Form inputs
 query = st.text_input("📌 Enter type of business & location (like 'Dental Clinics Boston'):")
 
-# Main action button
 if st.button("Get Leads"):
     if query:
-        with st.spinner(f"🔎 Searching for: {query} ..."):
+        with st.spinner(f"Searching for: {query} ..."):
             df = get_businesses_from_google_maps(query)
             results = []
             for i, row in df.iterrows():
@@ -157,14 +155,14 @@ if st.button("Get Leads"):
             csv = out_df.to_csv(index=False)
             st.download_button("📥 Download CSV", csv, "leads.csv", "text/csv")
     else:
-        st.warning("⚠️ Please enter a business & location to start.")
+        st.warning("Please enter a business & location to start.")
 else:
     st.info("👉 Enter your query and click 'Get Leads' to start.")
 
 # Footer
 st.markdown("""
-<hr style='border: 1px solid #ccc;'>
-<p style='text-align: center; font-size: 0.9rem;'>
+---
+<p style='text-align: center;'>
     Developed By - <strong>Moiz Deshmukh</strong>
 </p>
 """, unsafe_allow_html=True)

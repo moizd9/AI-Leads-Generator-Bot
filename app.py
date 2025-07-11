@@ -122,7 +122,7 @@ Perfect for marketers, consultants, or anyone curious about local opportunities.
 
 
 # Form inputs
-query = st.text_input("📌 Enter type of business & location (like 'Dental Clinics Boston'):")
+query = st.text_input("📌 Enter type of business & location:", placeholder="Write your query here...")
 
 if st.button("Get Leads"):
     if query:

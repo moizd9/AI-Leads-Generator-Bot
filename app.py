@@ -5,13 +5,13 @@ import json
 import time
 from openai import OpenAI
 
-# 🚀 Load API keys from Streamlit secrets
+#API keys from Streamlit secrets
 openai_key = st.secrets["api_keys"]["openai_key"]
 serpapi_key = st.secrets["api_keys"]["serpapi_key"]
 
 client = OpenAI(api_key=openai_key)
 
-# Helper functions
+#Helper functions
 def classify_brand_image(rating):
     if rating < 4:
         return "Average"
@@ -77,7 +77,7 @@ Business:
     except json.JSONDecodeError:
         return "", "", "", "", "", ""
 
-# 🚀 Streamlit UI with new style
+#Streamlit UI style
 st.markdown("""
     <style>
     .stApp {
@@ -99,7 +99,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 🔥 New header and intro
+#header and intro
 st.title("🚀 AI Lead Finder & Marketing Audit Tool")
 
 st.markdown("""

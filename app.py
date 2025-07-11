@@ -165,9 +165,18 @@ else:
     st.info("👉 Enter your query and click 'Get Leads' to start.")
 
 # Footer
+# Footer
 st.markdown("""
 ---
-<p style='text-align: center;'>
-    Developed By - <strong>Moiz Deshmukh</strong>
+<p style='text-align: center; font-size: 15px;'>
+    Developed by <strong>Moiz Deshmukh</strong> | 
+    <a href='https://www.moizdeshmukh.com' target='_blank'>www.moizdeshmukh.com</a>
+</p>
+<p style='text-align: center; font-size: 14px;'>
+    Curious how this AI Agent was built? 
+    <a href='https://www.moizdeshmukh.com/blog/ai-lead-finder-blueprint' target='_blank'>
+        Read the full blueprint here.
+    </a>
 </p>
 """, unsafe_allow_html=True)
+

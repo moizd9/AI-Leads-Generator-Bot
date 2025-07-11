@@ -174,7 +174,7 @@ st.markdown("""
 </p>
 <p style='text-align: center; font-size: 14px;'>
     Curious how this AI Agent was built? 
-    <a href='https://www.moizdeshmukh.com/blog/ai-lead-finder-blueprint' target='_blank'>
+    <a href='https://www.moizdeshmukh.com/post/blueprint-how-i-built-the-ai-lead-finder-marketing-audit-agent' target='_blank'>
         Read the full blueprint here.
     </a>
 </p>
